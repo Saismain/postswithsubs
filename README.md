@@ -4,7 +4,80 @@
 
   
 
-## 🚀 Основные возможности
+## 🚀 Структура проекта
+```mermaid
+    graph TD
+    subgraph FRONTEND["FRONTEND (Vue.js)"]
+        direction TB
+        A1["Auth Components"] 
+        A2["Posts Components"] 
+        A3["Comments Components"] 
+        A4["Subscription Components"] 
+    end
+
+    subgraph FRONTEND_LIBS[" "]
+        B1["Pinia Stores"] 
+        B2["Router (Vue-Router)"] 
+        B3["Axios (API Client)"] 
+        B4["Stripe SDK"] 
+    end
+
+    subgraph API_LAYER["HTTP/HTTPS API Calls"]
+        C1["API LAYER"] --> C1a["Auth Views"] 
+        C1 --> C1b["Comments Views"] 
+        C1 --> C1c["Payment Views"] 
+    end
+
+    subgraph BACKEND["BACKEND (Django + DRF)"]
+        D1["BUSINESS LOGIC LAYER"] --> D1a["User Serializers"] 
+        D1 --> D1b["Post Serializers"] 
+        D1 --> D1c["Comment Serializers"] 
+        D1 --> D1d["Subscription Serializers"] 
+    end
+
+    subgraph DATA_LAYER["DATA LAYER"]
+        E1["User Models"] 
+        E2["Post/Category Models"] 
+        E3["Comment Models"] 
+        E4["Payment/Sub Models"] 
+    end
+
+    subgraph INFRASTRUCTURE["INFRASTRUCTURE"]
+        F1["PostgreSQL Database"] 
+        F2["Stripe Payment Gateway"] 
+        F3["Celery Background Tasks"] 
+    end
+
+    subgraph STORAGE["STORAGE & MESSAGING"]
+        G1["Media Files Storage"] 
+        G2["Webhooks Handler"] 
+        G3["Redis Broker"] 
+    end
+
+    subgraph DEPLOYMENT["DEPLOYMENT INFRASTRUCTURE"]
+        H1["Nginx Web Server"] 
+        H2["Docker Containers"] 
+    end
+
+    %% Connections
+    FRONTEND --> FRONTEND_LIBS
+    FRONTEND --> API_LAYER
+    API_LAYER --> BACKEND
+    BACKEND --> DATA_LAYER
+    BACKEND --> INFRASTRUCTURE
+    INFRASTRUCTURE --> STORAGE
+    INFRASTRUCTURE --> DEPLOYMENT
+
+    %% Styling for clarity
+    style FRONTEND fill:#f9f,stroke:#333,stroke-width:2px
+    style FRONTEND_LIBS fill:#f9f,stroke:#333,stroke-width:2px
+    style API_LAYER fill:#bbf,stroke:#333,stroke-width:2px
+    style BACKEND fill:#bbf,stroke:#333,stroke-width:2px
+    style DATA_LAYER fill:#cff,stroke:#333,stroke-width:2px
+    style INFRASTRUCTURE fill:#fcf,stroke:#333,stroke-width:2px
+    style STORAGE fill:#fcf,stroke:#333,stroke-width:2px
+    style DEPLOYMENT fill:#ffe,stroke:#333,stroke-width:2px
+```
 
   
 ### Для пользователей
@@ -398,78 +471,3 @@ POST /api/v1/payment/create-checkout-session/ # Создание сессии о
 - Celery логи для асинхронных задач
 
 - Stripe webhook логи для отладки платежей
-
-
-```mermaid
-    graph TD
-    subgraph FRONTEND["FRONTEND (Vue.js)"]
-        direction TB
-        A1["Auth Components"] 
-        A2["Posts Components"] 
-        A3["Comments Components"] 
-        A4["Subscription Components"] 
-    end
-
-    subgraph FRONTEND_LIBS[" "]
-        B1["Pinia Stores"] 
-        B2["Router (Vue-Router)"] 
-        B3["Axios (API Client)"] 
-        B4["Stripe SDK"] 
-    end
-
-    subgraph API_LAYER["HTTP/HTTPS API Calls"]
-        C1["API LAYER"] --> C1a["Auth Views"] 
-        C1 --> C1b["Comments Views"] 
-        C1 --> C1c["Payment Views"] 
-    end
-
-    subgraph BACKEND["BACKEND (Django + DRF)"]
-        D1["BUSINESS LOGIC LAYER"] --> D1a["User Serializers"] 
-        D1 --> D1b["Post Serializers"] 
-        D1 --> D1c["Comment Serializers"] 
-        D1 --> D1d["Subscription Serializers"] 
-    end
-
-    subgraph DATA_LAYER["DATA LAYER"]
-        E1["User Models"] 
-        E2["Post/Category Models"] 
-        E3["Comment Models"] 
-        E4["Payment/Sub Models"] 
-    end
-
-    subgraph INFRASTRUCTURE["INFRASTRUCTURE"]
-        F1["PostgreSQL Database"] 
-        F2["Stripe Payment Gateway"] 
-        F3["Celery Background Tasks"] 
-    end
-
-    subgraph STORAGE["STORAGE & MESSAGING"]
-        G1["Media Files Storage"] 
-        G2["Webhooks Handler"] 
-        G3["Redis Broker"] 
-    end
-
-    subgraph DEPLOYMENT["DEPLOYMENT INFRASTRUCTURE"]
-        H1["Nginx Web Server"] 
-        H2["Docker Containers"] 
-    end
-
-    %% Connections
-    FRONTEND --> FRONTEND_LIBS
-    FRONTEND --> API_LAYER
-    API_LAYER --> BACKEND
-    BACKEND --> DATA_LAYER
-    BACKEND --> INFRASTRUCTURE
-    INFRASTRUCTURE --> STORAGE
-    INFRASTRUCTURE --> DEPLOYMENT
-
-    %% Styling for clarity
-    style FRONTEND fill:#f9f,stroke:#333,stroke-width:2px
-    style FRONTEND_LIBS fill:#f9f,stroke:#333,stroke-width:2px
-    style API_LAYER fill:#bbf,stroke:#333,stroke-width:2px
-    style BACKEND fill:#bbf,stroke:#333,stroke-width:2px
-    style DATA_LAYER fill:#cff,stroke:#333,stroke-width:2px
-    style INFRASTRUCTURE fill:#fcf,stroke:#333,stroke-width:2px
-    style STORAGE fill:#fcf,stroke:#333,stroke-width:2px
-    style DEPLOYMENT fill:#ffe,stroke:#333,stroke-width:2px
-```
