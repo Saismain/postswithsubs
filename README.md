@@ -9,57 +9,57 @@
     graph TD
     subgraph FRONTEND["FRONTEND (Vue.js)"]
         direction TB
-        A1["Auth Components"] 
-        A2["Posts Components"] 
-        A3["Comments Components"] 
-        A4["Subscription Components"] 
+        A1["Компоненты авторизации"]
+        A2["Компоненты постов"]
+        A3["Компоненты комментариев"]
+        A4["Компоненты подписки"]
     end
 
     subgraph FRONTEND_LIBS[" "]
-        B1["Pinia Stores"] 
-        B2["Router (Vue-Router)"] 
-        B3["Axios (API Client)"] 
-        B4["Stripe SDK"] 
+        B1["Pinia Stores"]
+        B2["Vue Router"]
+        B3["Axios (API-клиент)"]
+        B4["Stripe SDK"]
     end
 
-    subgraph API_LAYER["HTTP/HTTPS API Calls"]
-        C1["API LAYER"] --> C1a["Auth Views"] 
-        C1 --> C1b["Comments Views"] 
-        C1 --> C1c["Payment Views"] 
+    subgraph API_LAYER["HTTP/HTTPS API-запросы"]
+        C1["API LAYER"] --> C1a["Auth Views"]
+        C1 --> C1b["Comments Views"]
+        C1 --> C1c["Payment Views"]
     end
 
     subgraph BACKEND["BACKEND (Django + DRF)"]
-        D1["BUSINESS LOGIC LAYER"] --> D1a["User Serializers"] 
-        D1 --> D1b["Post Serializers"] 
-        D1 --> D1c["Comment Serializers"] 
-        D1 --> D1d["Subscription Serializers"] 
+        D1["БИЗНЕС-ЛОГИКА"] --> D1a["Сериализаторы пользователей"]
+        D1 --> D1b["Сериализаторы постов"]
+        D1 --> D1c["Сериализаторы комментариев"]
+        D1 --> D1d["Сериализаторы подписок"]
     end
 
-    subgraph DATA_LAYER["DATA LAYER"]
-        E1["User Models"] 
-        E2["Post/Category Models"] 
-        E3["Comment Models"] 
-        E4["Payment/Sub Models"] 
+    subgraph DATA_LAYER["СЛОЙ ДАННЫХ"]
+        E1["Модели пользователей"]
+        E2["Модели постов и категорий"]
+        E3["Модели комментариев"]
+        E4["Модели платежей и подписок"]
     end
 
-    subgraph INFRASTRUCTURE["INFRASTRUCTURE"]
-        F1["PostgreSQL Database"] 
-        F2["Stripe Payment Gateway"] 
-        F3["Celery Background Tasks"] 
+    subgraph INFRASTRUCTURE["ИНФРАСТРУКТУРА"]
+        F1["База данных PostgreSQL"]
+        F2["Платёжный шлюз Stripe"]
+        F3["Фоновые задачи Celery"]
     end
 
-    subgraph STORAGE["STORAGE & MESSAGING"]
-        G1["Media Files Storage"] 
-        G2["Webhooks Handler"] 
-        G3["Redis Broker"] 
+    subgraph STORAGE["ХРАНИЛИЩЕ И СООБЩЕНИЯ"]
+        G1["Хранилище медиафайлов"]
+        G2["Обработчик вебхуков"]
+        G3["Брокер сообщений Redis"]
     end
 
-    subgraph DEPLOYMENT["DEPLOYMENT INFRASTRUCTURE"]
-        H1["Nginx Web Server"] 
-        H2["Docker Containers"] 
+    subgraph DEPLOYMENT["ПРОДАКШЕН-ИНФРАСТРУКТУРА"]
+        H1["Веб-сервер Nginx"]
+        H2["Docker-контейнеры"]
     end
 
-    %% Connections
+    %% Связи
     FRONTEND --> FRONTEND_LIBS
     FRONTEND --> API_LAYER
     API_LAYER --> BACKEND
@@ -68,7 +68,7 @@
     INFRASTRUCTURE --> STORAGE
     INFRASTRUCTURE --> DEPLOYMENT
 
-    %% Styling for clarity
+    %% Стили
     style FRONTEND fill:#f9f,stroke:#333,stroke-width:2px
     style FRONTEND_LIBS fill:#f9f,stroke:#333,stroke-width:2px
     style API_LAYER fill:#bbf,stroke:#333,stroke-width:2px
