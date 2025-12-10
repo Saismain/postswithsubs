@@ -4,7 +4,7 @@
 
   
 
-## 🚀 Структура проекта
+##  Структура проекта
 ```mermaid
     graph TD
     subgraph FRONTEND["FRONTEND (Vue.js)"]
